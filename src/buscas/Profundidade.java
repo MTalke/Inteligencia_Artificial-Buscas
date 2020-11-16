@@ -166,22 +166,21 @@ public class Profundidade extends Busca {
         
     //  Empilhando
         pilha.push(no);
-//        System.out.println("/n operacao de empilhando");
+    //  System.out.println("/n operacao de empilhando");
         while (!pilha.isEmpty()) {
     //  Desempilhando
             No node = pilha.pop();
-//            System.out.println("/n operacao de desempilhar" + node.getEstados());
+    //  System.out.println("/n operacao de desempilhar" + node.getEstados());
             if (objetivo_final(node)) {
                 solucionado = true;
                 System.out.println("Busca por Profundidade - Solução encontrada!");
                 while (node.getPai() != null) { 
                     solucao.add(node);
-                    node = node.getPai();                    
+                    node = node.getPai();    
+//                  Quantidade de movimentos feitos para chegar na solução
                     movimentos++;
                 }                
-                
                 break;
-                
             } else {
                 expandir(node);
             }

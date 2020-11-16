@@ -12,7 +12,8 @@ package logica;
 public class No implements Comparable<No> {
 
     private No pai;
-    private int estados[][];
+//    Matriz com o estado inicial escolhido pelo usuário
+    private int estados[][]; 
     private int fator;
     private int custo;
     

@@ -52,7 +52,6 @@ public class Class_principal {
 
     public Class_principal() {
         lista = new ArrayList<>();
-        lista = new ArrayList<>();
         no = new No();
         proximo = 0;
     }
