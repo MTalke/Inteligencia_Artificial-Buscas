@@ -5,6 +5,8 @@
  */
 package inicio;
 
+import buscas.AEstrela;
+import buscas.Gulosa;
 import buscas.Largura;
 import buscas.Profundidade;
 import logica.No;
@@ -71,73 +73,125 @@ public class Class_principal {
 
     }
     
+        public int escolher_heuristica(){
+        
+        Scanner ler = new Scanner(System.in);
+
+        int heuristica;
+        System.out.println("Selecione a heuristica");
+        System.out.println("Digite 0 para - Peças fora do lugar -");
+        System.out.println("Digite 1 para - Distanciamento de Manhattan}");
+        heuristica = ler.nextInt();
+        
+        return heuristica;      
+        
+    }
+    
+    
     public void menu(){
         
         Scanner ler = new Scanner(System.in);
         int n;
         int proximo;
         int estado_inicial;
+        int heuristica;
 
         System.out.println("Escolha uma opção!");
         System.out.println("Escolha 1 para busca em profundidade");
         System.out.println("Escolha 2 para busca em largura");
+        System.out.println("Escolha 3 para busca gulosa");
+        System.out.println("Escolha 4 para busca A*");
+
         n = ler.nextInt();
         
         if (n == 1){
 
-            estado_inicial = escolher_estado_inicial();
-            
-            if(estado_inicial == 1){
-                
-                estado_inicial_quebra_cabeca(0);
-                busca = new Profundidade();
-                busca.solucionar(no);
-                System.out.println("Quantidade de nos expandidos: " + busca.getContador());
-                System.out.println("Movimentos: " + busca.getMovimentos());
-                solucao = busca.getSolucao();
-                busca.setContador(0);
-                
-            } if(estado_inicial == 2) {
-                
-                estado_inicial_quebra_cabeca(1);
-                busca = new Profundidade();
-                busca.solucionar(no);
-                System.out.println("Quantidade de nos expandidos: " + busca.getContador());
-                System.out.println("Total de movimentações: " + busca.getMovimentos());
-                solucao = busca.getSolucao();
-                busca.setContador(0);
-                
-            } else {
-                System.out.println("Fim");
-            }
-        } if (n == 2){
-            System.out.println("Busca por Largura");
-            estado_inicial = escolher_estado_inicial();
-            
-            if(estado_inicial == 1){
-                
-                estado_inicial_quebra_cabeca(0);
+                estado_inicial = escolher_estado_inicial();
+
+                if(estado_inicial == 1){
+
+                    estado_inicial_quebra_cabeca(0);
+                    busca = new Profundidade();
+                    busca.solucionar(no);
+                    System.out.println("Quantidade de nos expandidos: " + busca.getContador());
+                    System.out.println("Movimentos: " + busca.getMovimentos());
+                    solucao = busca.getSolucao();
+                    busca.setContador(0);
+                } if(estado_inicial == 2) {
+                    estado_inicial_quebra_cabeca(1);
+                    busca = new Profundidade();
+                    busca.solucionar(no);
+                    System.out.println("Quantidade de nos expandidos: " + busca.getContador());
+                    System.out.println("Total de movimentações: " + busca.getMovimentos());
+                    solucao = busca.getSolucao();
+                    busca.setContador(0);
+
+                } else {
+                    System.out.println("Fim");
+                }
+            } if (n == 2){
+                System.out.println("Busca por Largura");
+                estado_inicial = escolher_estado_inicial();
+                if(estado_inicial == 1){
+                    estado_inicial_quebra_cabeca(0);
+                } else if(estado_inicial == 2) {
+                    System.out.println("Aguarde pois este estado inicial demora para ser resolvido");
+                    estado_inicial_quebra_cabeca(1);
+                } 
                 busca = new Largura();
                 busca.solucionar(no);
                 System.out.println("Quantidade de nos expandidos: " + busca.getContador());
                 System.out.println("Total de movimentações: " + busca.getMovimentos());
                 solucao = busca.getSolucao();
                 busca.setContador(0);
-                
-            } if(estado_inicial == 2) {
-                System.out.println("Aguarde pois este estado inicial demora para ser resolvido");
+        } if (n == 3){
+        
+            System.out.println("Você escolheu Busca gulosa");
+            estado_inicial = escolher_estado_inicial();
+            if(estado_inicial == 1){
+                estado_inicial_quebra_cabeca(0);
+            }else if(estado_inicial == 2) {
                 estado_inicial_quebra_cabeca(1);
-                busca = new Largura();
-                busca.solucionar(no);
-                System.out.println("Quantidade de nos expandidos: " + busca.getContador());
-                System.out.println("Total de movimentações: " + busca.getMovimentos());
-                solucao = busca.getSolucao();
-                busca.setContador(0);
-                
+            }      
+            heuristica = escolher_heuristica();       
+            if ((heuristica == 0) || (heuristica == 1)){
+                Gulosa gula = new Gulosa();
+                gula.setHeuristica(heuristica);
+                gula.solucionar(no);
+                System.out.println("Quantidade de nos expandidos: " + gula.getContador());
+                System.out.println("Total de movimentações: " + gula.getMovimentos());
+                solucao = gula.getSolucao();
+                gula.setMovimentos(0);
+                gula.setContador(0);  
             } else {
-                System.out.println("Fim");
+               System.out.println("Digite os numeros solicitados");
             }
-    }
+
+        } else if(n == 4) {
+        
+            System.out.println("Você escolheu Busca A*");
+            estado_inicial = escolher_estado_inicial();
+            if(estado_inicial == 1){
+                estado_inicial_quebra_cabeca(0);
+            }else if(estado_inicial == 2) {
+                estado_inicial_quebra_cabeca(1);
+            }
+            heuristica = escolher_heuristica();
+            if ((heuristica == 0) || (heuristica == 1)){
+                AEstrela estrela = new AEstrela();
+                estrela.setHeuristica(heuristica);
+                estrela.solucionar(no);
+                System.out.println("Quantidade de nos expandidos: " + estrela.getContador());
+                System.out.println("Total de movimentações: " + estrela.getMovimentos());
+                solucao = estrela.getSolucao();
+                estrela.setMovimentos(0);
+                estrela.setContador(0);
+            } else {
+               System.out.println("Digite os numeros solicitados");
+
+            }
+        }
+    
     }
     
     
