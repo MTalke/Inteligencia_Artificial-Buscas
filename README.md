@@ -3,5 +3,5 @@ Trabalho prático de buscas utilizando a linguagem java para solucionar um quebr
 # Buscas com Informação
 Segue o link do vídeo sobre o funcionamento do algoritmo para as buscas em Largura e Profundidade: https://youtu.be/9u0OPi9h5Xg
 # Buscas sem Informação
-A busca sem informação se encontra na branch master
+A busca sem informação se encontra na branch master.
 Segue o link do vídeo sobre o funcionamento do algoritmo para busca Gulosa e A*: https://youtu.be/h4qNSO8D2Xk
